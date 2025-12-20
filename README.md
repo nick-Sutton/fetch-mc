@@ -3,6 +3,14 @@
 Fetch-MC is a terminal-based Minecraft Mod management utility for updating mods, resource packs, and shaders from Modrinth. 
 Fetch-MC downloads the latest compatible version of mods based on a specified Minecraft version.
 
+### Download
+Fetch-MC can be installed using the [Rust](https://rustup.rs/) toolchain from [crates.io](https://crates.io/crates/fetch-mc) or by installing the binaries.
+* **Rust Installation**
+  - Install the [Rust](https://rustup.rs/) toolchain
+  -  Run the following cargo command: `cargo install fetch-mc`
+* **Binary Installation**
+  - TODO
+
 ### Usage:
 * Fetch mods for the latest Minecraft version:        `$ fetch-mc`
 * Fetch mods for a specific Minecraft version:        `$ fetch-mc -v 1.21.1`
