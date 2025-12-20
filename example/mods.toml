@@ -1,0 +1,20 @@
+# Mods
+mods = [
+    "sodium",
+    "iris",
+    "lithium",
+    "indium",
+    "fabric-api",
+]
+
+# Resource packs
+resourcepacks = [
+    "faithful-32x",
+    "fresh-animations",
+]
+
+# Shaders
+shaders = [
+    "complementary-reimagined",
+    "bsl-shaders",
+]

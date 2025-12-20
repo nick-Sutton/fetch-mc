@@ -8,11 +8,14 @@ mod api;
 #[command(name = "fetch-mc")]
 #[command(about = "Download MC mods from Modrinth", long_about = None)]
 struct Cli {
-    #[arg(short, long)]
+    #[arg(short = 'v')]
     version: Option<String>,
     
-    #[arg(short, long, default_value = "mc_config.toml")]
+    #[arg(short = 'l', default_value = "mods.toml")]
     config_path: String,
+
+    #[arg(short = 'd', default_value = "./")]
+    output_dir: String,
 }
 
 #[tokio::main]
