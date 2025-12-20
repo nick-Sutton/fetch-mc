@@ -11,7 +11,7 @@ struct Cli {
     #[arg(short = 'v')]
     version: Option<String>,
     
-    #[arg(short = 'l', default_value = "mods.toml")]
+    #[arg(short = 'l')]
     config_path: String,
 
     #[arg(short = 'd', default_value = "./")]
