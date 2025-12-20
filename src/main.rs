@@ -36,6 +36,7 @@ async fn main() -> Result<()> {
         for mc_mod in mod_list {
             println!("Downloading mod: {}", mc_mod);
             
+            // Download mod
             match client.download_item(&mc_mod, mc_version, "mods").await {
                 Ok(_) => println!("  ✓ Downloaded"),
                 Err(e) => println!("  ✗ Failed: {}", e),
@@ -51,6 +52,7 @@ async fn main() -> Result<()> {
         for rp in rp_list {
             println!("Downloading Resource Pack: {}", rp);
             
+            // Download Resource Pack
             match client.download_item(&rp, mc_version, "resourcepacks").await {
                 Ok(_) => println!("  ✓ Downloaded"),
                 Err(e) => println!("  ✗ Failed: {}", e),
@@ -66,6 +68,7 @@ async fn main() -> Result<()> {
         for shader in shader_list {
             println!("Downloading Shader: {}", shader);
             
+            // Download Shader
             match client.download_item(&shader, mc_version, "shaderpacks").await {
                 Ok(_) => println!("  ✓ Downloaded"),
                 Err(e) => println!("  ✗ Failed: {}", e),
