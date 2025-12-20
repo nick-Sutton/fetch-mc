@@ -1,94 +1,80 @@
 use anyhow::Result;
 use clap::Parser;
 
-mod api;
 mod config;
+mod api;
 
 #[derive(Parser)]
 #[command(name = "fetch-mc")]
 #[command(about = "Download MC mods from Modrinth", long_about = None)]
 struct Cli {
     #[arg(short, long)]
-    mc_version: Option<String>,
+    version: Option<String>,
     
-    #[arg(short, long, default_value = "config.toml")]
+    #[arg(short, long, default_value = "mc_config.toml")]
     config_path: String,
 }
 
 #[tokio::main]
 async fn main() -> Result<()> {
-    // Create CLI parser
     let cli = Cli::parse();
     
-    // Parse config file
     println!("Loading config from: {}", cli.config_path);
     let config = config::parse_config(&cli.config_path)?;
-    
-    // Create Modrinth Client
-    let mod_client = api::ModrinthClient::new();
 
-    // Convert Option<String> to Option<&str>
-    let mc_version = cli.mc_version.as_deref();
+    // Create output directories
+    std::fs::create_dir_all("mods")?;
+    std::fs::create_dir_all("resourcepacks")?;
+    std::fs::create_dir_all("shaderpacks")?;
     
-    // Fetch mods from Modrinth
+    let client = api::ModrinthClient::new();
+    let mc_version = cli.version.as_deref();
+    
+    // Fetch mods
     if let Some(mod_list) = config.mods {
-        println!("Fetching {} mods...", mod_list.len());
+        println!("\nFetching {} mods...", mod_list.len());
         for mc_mod in mod_list {
-            println!("Downloading mod: {}", mc_mod);    
-            let versions = mod_client.fetch_versions(&mc_mod, mc_version).await?;
+            println!("Downloading mod: {}", mc_mod);
             
-            if let Some(latest) = versions.first() {
-                println!("  Found version: {}", latest.name);
-                // Download file
-                // download_file(&latest.files[0].url, &format!("mods/{}", latest.files[0].filename)).await?;
-            } else {
-                println!("  No compatible version found");
+            match client.download_item(&mc_mod, mc_version, "mods").await {
+                Ok(_) => println!("  ✓ Downloaded"),
+                Err(e) => println!("  ✗ Failed: {}", e),
             }
         }
     } else {
         println!("No Mods to Fetch.");
     }
     
-    // Fetch resourcepacks from Modrinth
+    // Fetch resource packs
     if let Some(rp_list) = config.resourcepacks {
-        println!("Fetching {} Resource Packs...", rp_list.len());
+        println!("\nFetching {} Resource Packs...", rp_list.len());
         for rp in rp_list {
             println!("Downloading Resource Pack: {}", rp);
             
-            let versions = mod_client.fetch_versions(&rp, mc_version).await?;
-            
-            if let Some(latest) = versions.first() {
-                println!("  Found version: {}", latest.name);
-                // TODO: Download the file
-                // download_file(&latest.files[0].url, &format!("mods/{}", latest.files[0].filename)).await?;
-            } else {
-                println!("  No compatible version found");
+            match client.download_item(&rp, mc_version, "resourcepacks").await {
+                Ok(_) => println!("  ✓ Downloaded"),
+                Err(e) => println!("  ✗ Failed: {}", e),
             }
         }
     } else {
-        println!("No Mods to Fetch.");
+        println!("No Resource Packs to Fetch.");
     }
     
-    // Fetch Shaders from Modrinth
+    // Fetch shaders
     if let Some(shader_list) = config.shaders {
-        println!("Fetching {} Shaders...", shader_list.len());
+        println!("\nFetching {} Shaders...", shader_list.len());
         for shader in shader_list {
             println!("Downloading Shader: {}", shader);
             
-            let versions = mod_client.fetch_versions(&shader, mc_version).await?;
-            
-            if let Some(latest) = versions.first() {
-                println!("  Found version: {}", latest.name);
-                // TODO: Download the file
-                // download_file(&latest.files[0].url, &format!("mods/{}", latest.files[0].filename)).await?;
-            } else {
-                println!("  No compatible version found");
+            match client.download_item(&shader, mc_version, "shaderpacks").await {
+                Ok(_) => println!("  ✓ Downloaded"),
+                Err(e) => println!("  ✗ Failed: {}", e),
             }
         }
     } else {
         println!("No Shaders to Fetch.");
     }
     
-    println!("Done!");
+    println!("\n✓ All downloads complete!");
     Ok(())
 }
