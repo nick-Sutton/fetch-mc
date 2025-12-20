@@ -6,7 +6,6 @@ description = "Fetch-MC is a terminal-based Minecraft Mod management utility for
 documentation = "https://github.com/nick-Sutton/fetch-mc"
 repository = "https://github.com/nick-Sutton/fetch-mc"
 license = "MIT"
-license-file = "LICENSE"
 
 [dependencies]
 anyhow = "1.0.100"
