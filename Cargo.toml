@@ -1,6 +1,6 @@
 [package]
 name = "fetch-mc"
-version = "0.1.0"
+version = "0.1.1"
 edition = "2024"
 description = "Fetch-MC is a terminal-based Minecraft Mod management utility for updating mods, resource packs, and shaders from Modrinth. Fetch-MC downloads the latest compatible version of mods based on a specified Minecraft version."
 documentation = "https://github.com/nick-Sutton/fetch-mc"
