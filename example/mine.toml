@@ -1,0 +1,59 @@
+# Mods
+mods = [
+    "appleskin",
+    "architectury-api",
+    "betterf3",
+    "better-stats",
+    "chat-heads",
+    "cloth-config",
+    "continuity",
+    "dynamic-fps",
+    "entity-model-features",
+    "entitytexturefeatures",
+    "entityculling",
+    "fabric-api",
+    "fabric-language-kotlin",
+    "ferrite-core",
+    "immediatelyfast",
+    "indium",
+    "iris",
+    "litematica",
+    "lithium",
+    "malilib",
+    "modmenu",
+    "mru",
+    "orthocamera",
+    "placeholder-api",
+    "puzzle",
+    "reeses-sodium-options",
+    "simplefog",
+    "3dskinlayers",
+    "smooth-scroll",
+    "sodium-extra",
+    "sodium",
+    "sound-physics-remastered",
+    "sound",
+    "tcdcommons",
+    "yacl",
+    "zoomify",
+]
+
+# Resource packs
+resourcepacks = [
+    "default-dark-mode",
+    "c4music",
+    "alpha-sound-pack",
+    "small-shield-totem",
+    "yeallux__cat_totem",
+    "aimz_tiny_crosshair",
+    "low-on-fire",
+    "enchant-icons-countxd",
+    "even-better-enchanted-books",
+    ""
+
+]
+
+# Shaders
+shaders = [
+    "complementary-reimagined",
+]
